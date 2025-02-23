@@ -1,11 +1,11 @@
-# 🎬 VideoForge - Automacao de Criacao de Videos Faceless
+# 🎬 VideoForge - Automacao de Criacao de Videos No Faceless
 
 <p align="center">
   <img src="assets/logo.png" alt="VideoForge Banner" width="400">
 </p>
   
 
-> Uma ferramenta poderosa para automatizar a criacao de videos faceless, otimizando todo o fluxo de producao para criadores de conteudo digital.
+> Uma ferramenta poderosa para automatizar a criacao de videos No Faceless, otimizando todo o fluxo de producao para criadores de conteudo digital.
 
 ## 🚀 Sobre o VideoForge
 
@@ -14,7 +14,7 @@
 ## ✨ Recursos Principais
 - 📆 **Agenda inteligente** para gerenciar datas de postagem.
 - 📺 **Gestao de canais** para organizacao dos projetos.
-- 🎙️ **Geracao de audio** com AllTalk (Piper).
+- 🎙️ **Geracao de audio** com Piper.
 - 🎞️ **Edicao de videos** e selecao de midias otimizada.
 - 🤖 **Modo AutoForge**: fluxo automatizado de producao de video.
 - 💾 **Banco de dados robusto** para armazenamento eficiente.
@@ -34,6 +34,7 @@ Coloque aqui imagens ou GIFs demonstrando o funcionamento do VideoForge assim qu
 
 ## 🔗 Contato
 📩 Para mais informacoes, entre em contato comigo!
+Jacson11anderson.jsn@gmail.com
 
 ---
 
