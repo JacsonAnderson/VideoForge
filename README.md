@@ -1,6 +1,6 @@
 # 🎬 VideoForge - Automacao de Criacao de Videos Faceless
 
-![VideoForge Banner](assets/banner.png)  
+![VideoForge Banner](assets/logo.png)  
 
 > Uma ferramenta poderosa para automatizar a criacao de videos faceless, otimizando todo o fluxo de producao para criadores de conteudo digital.
 
