@@ -26,6 +26,17 @@
 - 🕹️ **Dashboard interativo** com estatisticas.
 - 📡 **Integracoes com plataformas de video** (YouTube, TikTok, etc.).
 
+## 🐳 Como Rodar com Docker
+Para ativar o Docker e rodar o VideoForge localmente, siga os passos:
+1. Certifique-se de ter o **Docker** e **Docker Compose** instalados.
+2. No terminal, navegue até a pasta do projeto e execute:
+   ```sh
+   docker-compose up --build
+   ```
+3. Acesse no navegador: [http://localhost:8080](http://localhost:8080)
+
+Isso iniciará o servidor web do VideoForge dentro de um container Docker.
+
 ## 📌 Como Contribuir
 Atualmente, o reposito rio e privado. No futuro, estarei expandindo funcionalidades e refinando o sistema. Sugestoes sao bem-vindas! 🚀
 

@@ -5,3 +5,11 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/JacsonAnderson/VideoForge.git
 git push -u origin main
+
+
+Enviar o codigo...
+git add .
+ou
+git add nome_do_arquivo.ext
+git commit -m "Descrição das mudanças feitas"
+git push origin main
