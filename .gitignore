@@ -1,0 +1,2 @@
+# Ignore arquivos relacionados às chaves de API e Instalações do ambiente virtual
+.env
