@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VideoForge - Gerador de Roteiros</title>
+  <style>
+    /* Reset básico e estilos globais */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0E0D0D;
+      color: #F3F3F3;
+      line-height: 1.6;
+    }
+    /* Cabeçalho com gradiente */
+    header {
+      background: linear-gradient(90deg, #8B32F4, #5320A6);
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5em;
+    }
+    /* Área principal centralizada */
+    main {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    /* Formulário estilizado */
+    form {
+      background-color: rgba(139, 50, 244, 0.15);
+      border: 2px solid #8B32F4;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    form label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+      margin-bottom: 15px;
+      resize: vertical;
+    }
+    form button {
+      background-color: #8B32F4;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: #F3F3F3;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    form button:hover {
+      background-color: #5320A6;
+    }
+    /* Seção de resultado */
+    #result-section {
+      background-color: rgba(83, 32, 166, 0.15);
+      border: 2px solid #5320A6;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    #result-section h2 {
+      margin-bottom: 15px;
+    }
+    #resultado {
+      white-space: pre-wrap;
+    }
+    /* Rodapé fixo */
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #5320A6;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>VideoForge Gerador de Roteiros</h1>
+  </header>
+  <main>
+    <section id="prompt-section">
+      <form method="post">
+        <label for="prompt">Insira seu prompt:</label>
+        <textarea id="prompt" name="prompt" rows="5" placeholder="Digite aqui o seu prompt..."></textarea>
+        <button type="submit">Gerar Roteiro</button>
+      </form>
+    </section>
+    <section id="result-section">
+      <h2>Roteiro Gerado:</h2>
+      <div id="resultado">
+        <!-- O roteiro gerado será exibido aqui -->
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>© 2025 VideoForge</p>
+  </footer>
+</body>
+</html>
