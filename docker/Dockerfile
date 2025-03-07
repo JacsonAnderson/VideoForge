@@ -12,9 +12,6 @@ COPY app/main.py .
 COPY app/templates/ templates/
 COPY app/static/ static/
 
-# Copia a pasta de assets (que contém, por exemplo, logo.png)
-COPY assets/ assets/
-
 # Exponha a porta onde a aplicação Flask vai rodar (1313, por exemplo)
 EXPOSE 1313
 
