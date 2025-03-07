@@ -5,7 +5,7 @@ A seguir, uma versão atualizada e detalhada do README para instalação do Vide
 # 🎬 VideoForge - Automação de Criação de Vídeos No Faceless
 
 <p align="center">
-  <img src="assets/logo.png" alt="VideoForge Banner" width="400">
+  <img src="app/static/assets/logo.png" alt="VideoForge Banner" width="400">
 </p>
 
 > Uma ferramenta poderosa para automatizar a criação de vídeos No Faceless, otimizando todo o fluxo de produção para criadores de conteúdo digital.
