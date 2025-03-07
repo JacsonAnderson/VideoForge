@@ -26,22 +26,24 @@
 - 🕹️ **Dashboard interativo** com estatisticas.
 - 📡 **Integracoes com plataformas de video** (YouTube, TikTok, etc.).
 
-## 🐳 Como Rodar com Docker
-Para ativar o Docker e rodar o VideoForge localmente, siga os passos:
-1. Certifique-se de ter o **Docker** e **Docker Compose** instalados.
-2. No terminal, navegue até a pasta do projeto e execute:
-   ```sh
-   docker-compose up --build
-   ```
-3. Acesse no navegador: [http://localhost:8080](http://localhost:8080)
+##  Como Instalar
 
-Isso iniciará o servidor web do VideoForge dentro de um container Docker.
+Abaixe o VideoForge em algum lugar do seu computador
+git clone https://github.com/JacsonAnderson/VideoForge.git
 
-## 📌 Como Contribuir
-Atualmente, o reposito rio e privado. No futuro, estarei expandindo funcionalidades e refinando o sistema. Sugestoes sao bem-vindas! 🚀
+Assim que baixado crie um ambiente virtual o meu por exemplo é venvvideoforge, recomendo usar o mesmo nome que o meu para não ter erro com o gitignore!
+
+python -m venv venvideoforge
+
+venvvideoforge\scripts\activate
+
+logo ter o ambiente virtual criado, instale as dependencias do necesarias...
+
+
+
 
 ## 📷 Exemplo Visual
-Coloque aqui imagens ou GIFs demonstrando o funcionamento do VideoForge assim que possivel.
+Vou colocar imagens ou GIFs demonstrando o funcionamento do VideoForge assim que possivel.
 
 ## 🔗 Contato
 📩 Para mais informacoes, entre em contato comigo!

@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import webbrowser
 import threading
+import os
 
 app = Flask(__name__)
 
@@ -12,7 +13,8 @@ def open_browser():
     webbrowser.open_new("http://localhost:1313")
 
 if __name__ == "__main__":
-    # Inicia um timer para abrir o navegador 1 segundo após o servidor iniciar
-    threading.Timer(1, open_browser).start()
-    # Inicia o servidor na porta 1313
+    # Abre o navegador apenas se esse for o processo principal
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        threading.Timer(1, open_browser).start()
     app.run(host="127.0.0.1", port=1313, debug=True)
+

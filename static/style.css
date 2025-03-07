@@ -1,101 +1,216 @@
-/* Reset básico e estilos globais */
+/* Reset e estilos globais */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    background-color: #0E0D0D; /* Fundo escuro */
-    color: #F3F3F3; /* Texto claro */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-  }
-  
-  /* Cabeçalho com gradiente */
-  header {
-    background: linear-gradient(90deg, #8B32F4, #5320A6);
-    padding: 20px;
-    text-align: center;
-  }
-  
-  header h1 {
-    font-size: 2.5em;
-    margin: 0;
-  }
-  
-  /* Conteúdo principal centralizado */
-  main {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 20px;
-  }
-  
-  /* Estilo do formulário */
-  form {
-    background-color: rgba(139, 50, 244, 0.15);
-    border: 2px solid #8B32F4;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-  
-  form label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  form textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 1em;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    resize: vertical;
-  }
-  
-  form button {
-    background-color: #8B32F4;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: #F3F3F3;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  form button:hover {
-    background-color: #5320A6;
-  }
-  
-  /* Área de resultado do roteiro */
-  #result-section {
-    background-color: rgba(83, 32, 166, 0.15);
-    border: 2px solid #5320A6;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-  
-  #result-section h2 {
-    margin-bottom: 15px;
-  }
-  
-  #resultado {
-    white-space: pre-wrap; /* Preserva quebras de linha */
-  }
-  
-  /* Rodapé */
-  footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #5320A6;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0E0D0D; /* Fundo escuro */
+  color: #F3F3F3;         /* Texto claro */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* Container principal */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #5320A6, #8B32F4);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: width 0.3s ease;
+  position: relative;
+  border-right: 2px solid #8B32F4;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+/* Ocultar os elementos de texto quando recolhida */
+.sidebar.collapsed .profile .username,
+.sidebar.collapsed .profile .settings,
+.sidebar.collapsed .menu,
+.sidebar.collapsed .sidebar-footer {
+  display: none;
+}
+
+/* Toggle da Sidebar */
+.sidebar .sidebar-toggle {
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  background-color: #8B32F4;
+  color: #F3F3F3;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s;
+}
+
+.sidebar .sidebar-toggle:hover {
+  background-color: #5320A6;
+}
+
+/* Perfil na Sidebar */
+.profile {
+  text-align: center;
+  margin-bottom: 30px;
+  transition: opacity 0.3s;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #F3F3F3;
+  transition: transform 0.3s;
+}
+
+.profile-pic:hover {
+  transform: scale(1.05);
+}
+
+.username {
+  margin-top: 10px;
+  font-size: 1.3em;
+}
+
+.settings {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.5em;
+  color: #F3F3F3;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.settings:hover {
+  color: #8B32F4;
+}
+
+/* Menu da Sidebar */
+.menu ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.menu ul li {
+  margin: 15px 0;
+}
+
+.menu ul li a {
+  color: #F3F3F3;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: color 0.3s;
+}
+
+.menu ul li a:hover {
+  color: #8B32F4;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  text-align: center;
+  font-size: 0.9em;
+  padding-top: 10px;
+  border-top: 1px solid #8B32F4;
+}
+
+/* Área principal */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid #8B32F4;  /* Separador vertical entre sidebar e conteúdo */
+}
+
+/* Cabeçalho */
+header {
+  background: linear-gradient(90deg, #8B32F4, #5320A6);
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+header h1 {
+  font-size: 2.5em;
+}
+
+/* Separador horizontal abaixo do header */
+.separator-horizontal {
+  border-bottom: 2px solid #8B32F4;
+  margin: 0 20px 20px;
+}
+
+/* Conteúdo */
+.content {
+  flex: 1;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Cartões de funcionalidades */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.feature-card {
+  background-color: rgba(83, 32, 166, 0.15);
+  border: 1px solid #5320A6;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+  color: #8B32F4;
+}
+
+/* Rodapé */
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #5320A6;
+  font-size: 0.9em;
+  border-top: 2px solid #8B32F4; /* Separador superior no rodapé */
+}
