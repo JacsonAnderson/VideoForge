@@ -1,2 +1,5 @@
-# Ignore arquivos relacionados às chaves de API e Instalações do ambiente virtual
+# Ignore arquivos relacionados às chaves de API
 .env
+
+# Ignore arquivos do meu ambiente virtual
+venvvideoforge/
