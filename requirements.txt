@@ -1,2 +1,2 @@
-python -m pip install flask
-pip install os
+Flask==2.2.5
+requests
