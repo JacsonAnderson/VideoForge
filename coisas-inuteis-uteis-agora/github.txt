@@ -13,3 +13,8 @@ ou
 git add nome_do_arquivo.ext
 git commit -m "Descrição das mudanças feitas"
 git push origin main
+
+
+carregar as coisas da nuvem na minha maquina...
+git pull origin main
+
