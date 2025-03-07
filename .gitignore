@@ -1,5 +1,26 @@
-# Ignore arquivos relacionados às chaves de API
-.env
 
-# Ignore arquivos do meu ambiente virtual
+# Arquivos Python compilados e cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Ambiente virtual
 venvvideoforge/
+
+# Pasta de dados (banco de dados, arquivos gerados, etc.)
+data/
+# Se quiser ser mais específico, você pode ignorar apenas o diretório do MySQL:
+# data/mysql/
+
+# Arquivos de log
+*.log
+
+# Build e distribuições
+build/
+dist/
+
+# Arquivos Docker extras (se houver)
+docker-compose.override.yml
+
+# Arquivos de configuração sensíveis
+.env
