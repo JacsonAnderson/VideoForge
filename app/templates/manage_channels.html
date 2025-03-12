@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Canais - VideoForge</title>
+  <!-- Inclui o CSS geral da aplicação -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* Estilos específicos para a página Gerenciar Canais */
+    .channel-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #5320A6;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .channel-toolbar .actions-left button,
+    .channel-toolbar .actions-right button {
+      background: linear-gradient(45deg, #8B32F4, #5320A6);
+      border: none;
+      color: #F3F3F3;
+      padding: 10px 15px;
+      margin-right: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+    }
+    .channel-toolbar .actions-left button:hover,
+    .channel-toolbar .actions-right button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(45deg, #5320A6, #8B32F4);
+    }
+    .channel-table table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #1e1e1e;
+      color: #F3F3F3;
+      border: 1px solid #5320A6;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .channel-table th, .channel-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #5320A6;
+    }
+    .channel-table th {
+      background-color: #5320A6;
+    }
+    .channel-table tr:last-child td {
+      border-bottom: none;
+    }
+    .channel-table tr:hover {
+      background-color: rgba(83, 32, 166, 0.3);
+    }
+    .channel-table ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar (reutilizada de index) -->
+    <aside class="sidebar collapsed" id="sidebar">
+      <div class="sidebar-toggle" id="sidebar-toggle">&#8942;</div>
+      <div class="profile">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Foto de Perfil" class="profile-pic">
+        <h2 class="username">Seu Nome</h2>
+        <a href="#" class="settings" title="Configurações">&#9881;</a>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+          <li><a href="{{ url_for('manage_channels') }}">Gerenciar Canais</a></li>
+          <li><a href="#">Gerar Roteiro</a></li>
+          <li><a href="#">Gerar Áudio</a></li>
+          <li><a href="#">Editar Vídeo</a></li>
+          <li><a href="#">Configurações</a></li>
+          <li><a href="#">Ajuda</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <p>Versão 1.0</p>
+      </div>
+    </aside>
+    
+    <!-- Área principal -->
+    <main class="main-content">
+      <header>
+        <div class="header-content">
+          <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo VideoForge" class="header-logo">
+          <h1>Gerenciar Canais</h1>
+        </div>
+      </header>
+      <div class="separator-horizontal"></div>
+      
+      <section class="content">
+        <!-- Toolbar com ações -->
+        <div class="channel-toolbar">
+          <div class="actions-left">
+            <button id="add-channel-btn">Adicionar Canal</button>
+            <button id="edit-channel-btn">Editar Canal</button>
+            <button id="delete-channel-btn">Excluir Canal</button>
+          </div>
+          <div class="actions-right">
+            <button id="add-video-btn">Adicionar Vídeo</button>
+          </div>
+        </div>
+        
+        <!-- Tabela dos canais -->
+        <div class="channel-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Canal</th>
+                <th>Vídeos Pendentes</th>
+                <th>Últimos 3 Vídeos Postados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Linha de exemplo; futuramente, os dados serão populados dinamicamente -->
+              <tr>
+                <td>Canal Exemplo 1</td>
+                <td>
+                  <ul>
+                    <li>Vídeo pendente 1</li>
+                    <li>Vídeo pendente 2</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    <li>Vídeo postado 1</li>
+                    <li>Vídeo postado 2</li>
+                    <li>Vídeo postado 3</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>Canal Exemplo 2</td>
+                <td>
+                  <ul>
+                    <li>Vídeo pendente 3</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    <li>Vídeo postado 4</li>
+                    <li>Vídeo postado 5</li>
+                    <li>Vídeo postado 6</li>
+                  </ul>
+                </td>
+              </tr>
+              <!-- Outras linhas serão geradas conforme os dados do banco -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      <footer>
+        <p>© 2025 VideoForge. Todos os direitos reservados.</p>
+      </footer>
+    </main>
+  </div>
+  
+  <!-- Script para alternar a sidebar -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    toggleBtn.addEventListener('click', function() {
+      sidebar.classList.toggle('collapsed');
+    });
+  </script>
+</body>
+</html>

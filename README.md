@@ -79,7 +79,7 @@ Este comando fará o seguinte:
 Após iniciar os containers, abra o navegador e acesse:
 
 ```
-http://localhost:8080
+http://localhost:1313
 ```
 
 O Nginx redirecionará a requisição para sua aplicação Flask, que estará rodando na porta 1313 internamente.
