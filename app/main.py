@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+from app import app, db
+from app.models import Channel
 import webbrowser
 import threading
 import os

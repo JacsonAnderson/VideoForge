@@ -7,13 +7,11 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia os arquivos da aplicação: main.py, templates e static
-COPY app/main.py .
-COPY app/templates/ templates/
-COPY app/static/ static/
+# Copia a pasta inteira "app" para o container
+COPY app/ app/
 
-# Exponha a porta onde a aplicação Flask vai rodar (1313, por exemplo)
+# Exponha a porta onde a aplicação Flask vai rodar
 EXPOSE 1313
 
-# Comando para iniciar o servidor Flask
-CMD ["python", "main.py"]
+# Inicia a aplicação Flask como módulo
+CMD ["python", "-m", "app.main"]

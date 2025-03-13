@@ -1,9 +1,7 @@
 import random
 import string
+from app import db
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
 
 def generate_channel_id():
     """Gera um ID único de 16 caracteres (letras maiúsculas e dígitos) para o canal."""
@@ -11,6 +9,7 @@ def generate_channel_id():
 
 class Channel(db.Model):
     __tablename__ = 'channels'
+    
     id = db.Column(db.String(16), primary_key=True, default=generate_channel_id)
     name = db.Column(db.String(128), nullable=False)
     language = db.Column(db.String(64), nullable=False)
@@ -20,6 +19,3 @@ class Channel(db.Model):
     watermark = db.Column(db.String(128), nullable=True)
     music = db.Column(db.String(128), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return f"<Channel {self.name} ({self.id})>"

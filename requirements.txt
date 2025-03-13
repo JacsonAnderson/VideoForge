@@ -1,2 +1,5 @@
 Flask==2.2.5
+Flask-SQLAlchemy
+Flask-Migrate
+PyMySQL
 requests
