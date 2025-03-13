@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VideoForge - Plataforma</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar (recolhível) -->
+    <aside class="sidebar collapsed" id="sidebar">
+      <div class="sidebar-toggle" id="sidebar-toggle">&#8942;</div>
+      <div class="profile">
+        <img src="static/logo.png" alt="Foto de Perfil" class="profile-pic">
+        <h2 class="username">Seu Nome</h2>
+        <a href="#" class="settings" title="Configurações">&#9881;</a>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Gerenciar Canais</a></li>
+          <li><a href="#">Gerar Roteiro</a></li>
+          <li><a href="#">Gerar Áudio</a></li>
+          <li><a href="#">Editar Vídeo</a></li>
+          <li><a href="#">Configurações</a></li>
+          <li><a href="#">Ajuda</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <p>Versão 1.0</p>
+      </div>
+    </aside>
+
+    <!-- Área principal -->
+    <main class="main-content">
+      <header>
+        <div class="header-content">
+          <img src="static/logo.png" alt="Logo VideoForge" class="header-logo">
+          <h1>VideoForge</h1>
+          <p>PHP Version: <?php echo phpversion(); ?></p>
+        </div>
+      </header>
+      <div class="separator-horizontal"></div>
+      <section class="content">
+        <div class="welcome">
+          <h2>Bem-vindo à Plataforma VideoForge</h2>
+          <p>
+            Uma solução completa para a automatização da criação de vídeos no estilo "faceless". 
+            Gerencie seus canais, edite vídeos, gere roteiros e muito mais com uma interface moderna e intuitiva.
+          </p>
+        </div>
+        <div class="features">
+          <div class="feature-card">
+            <h3>Gerar Roteiro</h3>
+            <p>Utilize inteligência artificial para criar roteiros detalhados a partir dos seus prompts.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Gerar Áudio</h3>
+            <p>Converta textos em áudio com vozes realistas e personalizáveis.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Editar Vídeo</h3>
+            <p>Edite e aperfeiçoe seus vídeos com ferramentas intuitivas.</p>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <p>© 2025 VideoForge. Todos os direitos reservados.</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Script para alternar a sidebar -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    toggleBtn.addEventListener('click', function() {
+      sidebar.classList.toggle('collapsed');
+    });
+  </script>
+</body>
+</html>

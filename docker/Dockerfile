@@ -1,17 +1,10 @@
-FROM python:3.11-slim
+FROM php:8.2-apache
 
-# Define o diretório de trabalho no container
-WORKDIR /app
+# Ativa o mod_rewrite, se necessário
+RUN a2enmod rewrite
 
-# Copia o requirements.txt e instala as dependências
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copia os templates e arquivos estáticos para o diretório do Apache
+COPY app/templates/ /var/www/html/
+COPY app/static/ /var/www/html/static/
 
-# Copia a pasta inteira "app" para o container
-COPY app/ app/
-
-# Exponha a porta onde a aplicação Flask vai rodar
-EXPOSE 1313
-
-# Inicia a aplicação Flask como módulo
-CMD ["python", "-m", "app.main"]
+EXPOSE 80
