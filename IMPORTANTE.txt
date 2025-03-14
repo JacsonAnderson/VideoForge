@@ -1,5 +1,1 @@
-Por padrão, ao subir os containers com Docker, a aplicação não executa automaticamente os comandos de migração. Ou seja, a tabela channels não será criada sem que você execute os comandos (ou automatize esse processo no entrypoint). Em um ambiente de produção, é comum que se tenha um script de inicialização que verifica e aplica as migrações. Mas, se você não configurar isso, precisará rodar os comandos:
-
-docker-compose exec app flask db init        # Apenas se for a primeira vez
-docker-compose exec app flask db migrate -m "Criando tabela channels"
-docker-compose exec app flask db upgrade
+docker-compose exec app php /var/www/app/migrations/create_channels_table.php
