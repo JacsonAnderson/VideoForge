@@ -51,3 +51,14 @@ services:
       - "1314:80"
     depends_on:
       - db
+
+  python:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile-python
+    container_name: videoforge_python
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"

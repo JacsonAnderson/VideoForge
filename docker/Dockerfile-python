@@ -1,0 +1,14 @@
+FROM python:3.11-slim
+
+# Define o diretório de trabalho no container
+WORKDIR /app
+
+# Copia o código Python do diretório "python" do projeto para o container
+COPY python/ /app/
+
+# Instala as dependências do Python (se houver um requirements.txt na pasta python)
+COPY python/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Inicia o script Python
+CMD ["python", "main.py"]
