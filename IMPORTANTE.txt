@@ -1,5 +1,7 @@
 Criar a tabela sql
 docker-compose exec app php /var/www/app/migrations/create_channels_table.php
+docker exec -it videoforge_app php /var/www/app/migrations/create_insertion_logs_table.php
+
 
 
 Criar as Pastas de armazenamento

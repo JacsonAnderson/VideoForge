@@ -96,8 +96,3 @@
   }
 </style>
 
-  <!-- Inclui o módulo do Modal -->
-  <?php include 'channels/create_channel_modal.php'; ?>
-
-  <!-- Inclui o módulo do create_channel -->
-  <?php include 'channels/create_channel.php'; ?>

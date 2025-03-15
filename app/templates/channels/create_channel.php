@@ -3,6 +3,12 @@ header('Content-Type: application/json');
 
 require_once __DIR__ . '/../../app/db.php';
 
+// Verificar se é uma requisição AJAX
+if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') {
+    echo json_encode(['status' => 'error', 'message' => 'Acesso inválido.']);
+    exit;
+}
+
 // Função para gerar um ID único
 function generateChannelId() {
     return strtoupper(bin2hex(random_bytes(8)));
@@ -24,23 +30,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        // Verificar se o canal com o mesmo nome já existe
-        $checkSql = "SELECT id FROM channels WHERE name = :name LIMIT 1";
+        $pdo->beginTransaction();
+
+        // Verificar se o canal já existe com bloqueio para evitar race conditions
+        $checkSql = "SELECT id FROM channels WHERE BINARY LOWER(name) = LOWER(:name) LIMIT 1 FOR UPDATE";
         $checkStmt = $pdo->prepare($checkSql);
         $checkStmt->execute([':name' => $name]);
-        
+
         if ($checkStmt->fetch()) {
+            $pdo->rollBack();
             echo json_encode(['status' => 'error', 'message' => 'Este canal já existe.']);
             exit;
         }
 
-        // Gerar ID e inserir o novo canal
         $id = generateChannelId();
 
+        // Inserir o canal
         $sql = "INSERT INTO channels (id, name, language, min_prompt_chars, prompt, voice_model, watermark, music)
                 VALUES (:id, :name, :language, :min_prompt_chars, :prompt, :voice_model, :watermark, :music)";
         $stmt = $pdo->prepare($sql);
-        
+
         $stmt->execute([
             ':id'               => $id,
             ':name'             => $name,
@@ -52,10 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':music'            => $music,
         ]);
 
+        $pdo->commit();
         echo json_encode(['status' => 'success', 'message' => 'Canal criado com sucesso!']);
     } catch (PDOException $e) {
+        $pdo->rollBack();
         echo json_encode(['status' => 'error', 'message' => 'Erro ao criar o canal: ' . $e->getMessage()]);
     }
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Método inválido.']);
 }
+?>

@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const openCreateChannelBtn = document.getElementById('openCreateChannelBtn');
   const closeModal = createChannelModal.querySelector('.close-modal');
   const createChannelForm = document.getElementById('createChannelForm');
+  const submitBtn = createChannelForm.querySelector('.submit-btn');
 
   function closeModalFunc() {
     createChannelModal.style.display = "none";
@@ -74,19 +75,23 @@ document.addEventListener("DOMContentLoaded", function() {
   createChannelForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
+    submitBtn.disabled = true;
+
     const formData = new FormData(createChannelForm);
     fetch(createChannelForm.action, {
       method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      },
       body: formData
     })
     .then(response => response.json())
     .then(data => {
+      submitBtn.disabled = false;
       if (data.status === 'success') {
         closeModalFunc();
-        showNotification(data.message, true);
-      } else {
-        showNotification(data.message, false);
       }
+      showNotification(data.message, data.status === 'success');
     })
     .catch(error => {
       showNotification("Erro na comunicação com o servidor.", false);
@@ -95,31 +100,41 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   function showNotification(message, isSuccess) {
-    let notification = document.getElementById('notification');
-    if (!notification) {
-      notification = document.createElement('div');
-      notification.id = 'notification';
-      notification.style.position = 'fixed';
-      notification.style.top = '100px';
-      notification.style.left = '50%';
-      notification.style.transform = 'translateX(-50%)';
-      notification.style.padding = '15px 30px';
-      notification.style.borderRadius = '8px';
-      notification.style.zIndex = '1100';
-      notification.style.fontSize = '1.2em';
-      notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
-      document.body.appendChild(notification);
+    const existingNotification = document.getElementById('notification');
+    if (existingNotification) {
+      existingNotification.remove();
     }
 
-    notification.innerHTML = message;
+    const notification = document.createElement('div');
+    notification.id = 'notification';
+    notification.textContent = message;
+    notification.style.position = 'fixed';
+    notification.style.top = '100px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.padding = '15px 30px';
+    notification.style.borderRadius = '8px';
+    notification.style.zIndex = '1100';
+    notification.style.fontSize = '1.2em';
+    notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+    notification.style.opacity = '0';
+    notification.style.transition = 'opacity 0.5s ease';
     notification.style.background = isSuccess 
       ? 'linear-gradient(45deg, #32CD32, #228B22)' 
       : 'linear-gradient(45deg, #FF6347, #FF4500)';
     notification.style.color = '#fff';
-    notification.style.display = 'block';
 
-    setTimeout(function() {
-      notification.style.display = 'none';
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.style.opacity = '1';
+    }, 100);
+
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      setTimeout(() => {
+        notification.remove();
+      }, 500);
     }, 5000);
   }
 });
