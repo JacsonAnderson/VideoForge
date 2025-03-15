@@ -1,9 +1,9 @@
-<!-- app/templates/partials/modal.php -->
+<!-- app/templates/channels/modal.php -->
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
     <div class="modal-header">
-      <button id="createChannelBtn" class="btn create-channel-btn">Criar Canal</button>
+      <button id="openCreateChannelBtn" class="btn create-channel-btn">Criar Canal</button>
     </div>
     <div class="modal-body">
       <!-- Aqui você poderá inserir a listagem de canais ou outros conteúdos futuramente -->
@@ -56,7 +56,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 800px;
-    height: 400px;
+    height: 600px;
     position: relative;
     overflow-y: auto;
   }
@@ -95,3 +95,9 @@
     /* Estilos adicionais para o conteúdo do modal, se necessário */
   }
 </style>
+
+  <!-- Inclui o módulo do Modal -->
+  <?php include 'channels/create_channel_modal.php'; ?>
+
+  <!-- Inclui o módulo do create_channel -->
+  <?php include 'channels/create_channel.php'; ?>
