@@ -8,40 +8,16 @@
 </head>
 <body>
   <div class="container">
-    <!-- Sidebar (recolhível) -->
-    <aside class="sidebar collapsed" id="sidebar">
-      <div class="sidebar-toggle" id="sidebar-toggle">&#8942;</div>
-      <div class="profile">
-        <img src="static/logo.png" alt="Foto de Perfil" class="profile-pic">
-        <h2 class="username">Seu Nome</h2>
-        <a href="#" class="settings" title="Configurações">&#9881;</a>
-      </div>
-      <nav class="menu">
-        <ul>
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Gerenciar Canais</a></li>
-          <li><a href="#">Gerar Roteiro</a></li>
-          <li><a href="#">Gerar Áudio</a></li>
-          <li><a href="#">Editar Vídeo</a></li>
-          <li><a href="#">Configurações</a></li>
-          <li><a href="#">Ajuda</a></li>
-        </ul>
-      </nav>
-      <div class="sidebar-footer">
-        <p>Versão 1.0</p>
-      </div>
-    </aside>
+    <!-- Sidebar (incluído via partial) -->
+    <?php include 'partials/sidebar.php'; ?>
 
     <!-- Área principal -->
     <main class="main-content">
-      <header>
-        <div class="header-content">
-          <img src="static/logo.png" alt="Logo VideoForge" class="header-logo">
-          <h1>VideoForge</h1>
-          <p>PHP Version: <?php echo phpversion(); ?></p>
-        </div>
-      </header>
+      <!-- Cabeçalho (incluído via partial) -->
+      <?php include 'partials/header-content.php'; ?>
+      
       <div class="separator-horizontal"></div>
+      
       <section class="content">
         <div class="welcome">
           <h2>Bem-vindo à Plataforma VideoForge</h2>
@@ -65,9 +41,9 @@
           </div>
         </div>
       </section>
-      <footer>
-        <p>© 2025 VideoForge. Todos os direitos reservados.</p>
-      </footer>
+
+      <!-- Rodapé (incluído via partial) -->
+      <?php include 'partials/footer.php'; ?>
     </main>
   </div>
 

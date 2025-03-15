@@ -1,1 +1,7 @@
+Criar a tabela sql
 docker-compose exec app php /var/www/app/migrations/create_channels_table.php
+
+
+Criar as Pastas de armazenamento
+mkdir data\bancodevideos
+mkdir data\channels
