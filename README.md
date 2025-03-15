@@ -1,7 +1,3 @@
-A seguir, uma versão atualizada e detalhada do README para instalação do VideoForge no PC usando Docker. Essa versão explica cada etapa do processo, desde o download do repositório até a inicialização da aplicação com Docker Desktop, sem a necessidade de start.bat ou ambiente virtual manual.
-
----
-
 # 🎬 VideoForge - Automação de Criação de Vídeos No Faceless
 
 <p align="center">
@@ -14,24 +10,30 @@ A seguir, uma versão atualizada e detalhada do README para instalação do Vide
 
 **VideoForge** é uma solução completa para gerenciar canais, agendar postagens e criar vídeos de forma automática. O sistema combina geração de roteiros, síntese de voz, seleção de mídia e edição automatizada para facilitar a produção de conteúdo em massa.
 
+
 ## ✨ Recursos Principais
 
-- 📆 **Agenda inteligente** para gerenciar datas de postagem.
-- 📺 **Gestão de canais** para organização dos projetos.
-- 🎙️ **Geração de áudio** com Piper.
-- 🎞️ **Edição de vídeos** e seleção de mídias otimizada.
-- 🤖 **Modo AutoForge**: fluxo automatizado de produção de vídeo.
-- 💾 **Banco de dados robusto** para armazenamento eficiente.
-- 🛠️ **Ferramentas modulares** para uso independente.
+- **Ainda nenhum** – Conforme os recursos forem ficando prontos, irei listá-los aqui.
+- **Painel de Conteúdo** – Espaço exclusivo para gerenciar seus canais e vídeos. Muitos recursos ainda estão em fase de teste.
+
+## ✨ Recursos Disponíveis para Uso 🔨 (Ainda em Teste)
+
+- **Criação de Canais** – Você já pode adicionar seu canal e excluí-lo caso cometa algum erro. O canal já está conectado ao banco de dados SQL. (Futuramente, adicionarei a função de modificar o canal).
 
 ## 🔨 Em Desenvolvimento
 
-- 🔄 **Treinamento de modelo de voz próprio**.
-- 🖼️ **Gerador de capas automático**.
-- 🕹️ **Dashboard interativo** com estatísticas.
-- 📡 **Integrações com plataformas de vídeo** (YouTube, TikTok, etc.).
+- 📆 **Agenda Inteligente** para gerenciar datas de postagem.
+- 📺 **Gestão de Canais** para organização dos projetos.
+- 🎙️ **Geração de Áudio** com Piper.
+- 🎞️ **Edição de Vídeos** e seleção otimizada de mídias.
+- 🤖 **Modo AutoForge**: fluxo automatizado de produção de vídeos.
+- 💾 **Banco de Dados Robusto** para armazenamento eficiente.
+- 🛠️ **Ferramentas Modulares** para uso independente.
+- 🔄 **Treinamento de Modelo de Voz Próprio**.
+- 🖼️ **Gerador de Capas Automático**.
+- 🕹️ **Dashboard Interativo** com estatísticas.
+- 📡 **Integrações com Plataformas de Vídeo** (YouTube, TikTok, etc.).
 
----
 
 ## ⚙️ Como Instalar (Nativo, com Docker Desktop)
 
@@ -74,6 +76,17 @@ Este comando fará o seguinte:
 - **Iniciar o container do MySQL:** Usando a imagem oficial do MySQL com as variáveis de ambiente definidas.
 - **Iniciar o container do Nginx:** Que gerencia as portas e faz o proxy reverso para sua aplicação Flask.
 
+### Tenho que numerar isso aqui tambem porem vou fazer depois
+
+execute o install.bat
+
+tambem rode este codigo ( Vou automatizar ele em um futuro proximo! )
+docker-compose exec app php /var/www/app/migrations/create_channels_table.php
+
+esse aqui tambem para Criar as Pastas de armazenamento
+mkdir data\bancodevideos
+mkdir data\channels
+
 ### 5. Acessar a Aplicação
 
 Após iniciar os containers, abra o navegador e acesse:
@@ -109,11 +122,4 @@ Para mais informações, entre em contato:
 
 ---
 
-### Notas Adicionais
-
-- **Docker é Opcional:**  
-  Embora esta versão utilize Docker para facilitar a implantação e manter um ambiente consistente, se você preferir uma instalação nativa (sem Docker), será necessário configurar manualmente um ambiente virtual e instalar as dependências listadas no `requirements.txt`. Contudo, o uso do Docker é altamente recomendado para evitar conflitos de dependências e simplificar o deploy.
-
-- **Estrutura do Projeto:**  
-  A estrutura do projeto está organizada para facilitar a expansão e modularização, permitindo a adição de novas funcionalidades sem comprometer a organização do código.
 
