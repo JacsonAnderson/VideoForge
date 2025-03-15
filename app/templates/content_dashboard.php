@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel de Conteúdo</title>
+  <title>Painel de Conteúdo - VideoForge</title>
   <link rel="stylesheet" href="static/style.css">
   <style>
-    /* Estilos específicos para a página Content Dashboard */
+    /* Estilos para a página Painel de Conteúdo */
     .toolbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 30px; /* Espaço abaixo do header */
+      margin-top: 30px;
       margin-bottom: 20px;
-      padding: 0 50px; /* Espaço horizontal para as laterais */
+      padding: 0 50px;
     }
     .toolbar-center {
       flex: 1;
@@ -32,7 +32,6 @@
     .toolbar .btn:hover {
       transform: scale(1.05);
     }
-    /* Botão "Adicionar Vídeo" - redondo e alinhado à direita, com 50px de distância */
     .add-video-btn {
       width: 60px;
       height: 60px;
@@ -54,21 +53,18 @@
 </head>
 <body>
   <div class="container">
-    <!-- Inclui a Sidebar -->
     <?php include 'partials/sidebar.php'; ?>
 
-    <!-- Área principal -->
     <main class="main-content">
-      <!-- Cabeçalho -->
       <?php include 'partials/header-content.php'; ?>
       
-      <!-- Barra de Ferramentas -->
       <div class="toolbar">
         <div class="toolbar-left">
           <!-- Espaço para conteúdo à esquerda, se necessário -->
         </div>
         <div class="toolbar-center">
-          <button class="btn" onclick="location.href='content_dashboard.php'">Gerenciar Canais</button>
+          <!-- Botão que abre o modal -->
+          <button id="openModalBtn" class="btn">Gerenciar Canais</button>
         </div>
         <div class="toolbar-right">
           <button class="add-video-btn" onclick="location.href='adicionar_video.php'">+</button>
@@ -83,16 +79,17 @@
           Neste painel, você poderá gerenciar canais e vídeos. Visualize, edite e organize os canais,
           adicione novos vídeos, acompanhe o status de produção e defina tags para controlar o processo.
         </p>
-        <!-- Insira aqui a lista de canais e vídeos, com suas funcionalidades -->
       </section>
 
-      <!-- Inclui o Rodapé -->
       <?php include 'partials/footer.php'; ?>
     </main>
   </div>
 
-  <!-- Script para alternar a sidebar -->
+  <!-- Inclui o módulo do Modal -->
+  <?php include 'partials/modal.php'; ?>
+  
   <script>
+    // Lógica para alternar a sidebar
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('sidebar-toggle');
     toggleBtn.addEventListener('click', function() {
