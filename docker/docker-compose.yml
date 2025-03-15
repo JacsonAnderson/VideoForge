@@ -11,6 +11,8 @@ services:
     restart: always
     depends_on:
       - db
+    volumes:
+      - ./data/channels:/var/www/app/docker/data/channels  # Adicionando o volume
 
   db:
     image: mysql:8.0
