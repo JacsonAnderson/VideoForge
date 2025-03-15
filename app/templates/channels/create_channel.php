@@ -1,9 +1,9 @@
 <?php
-// app/templates/channels/create_channel.php
+header('Content-Type: application/json');
 
-require_once __DIR__ . '/../../app/db.php'; 
+require_once __DIR__ . '/../../app/db.php';
 
-// Função para gerar um ID único de 16 caracteres (hexadecimal em letras maiúsculas)
+// Função para gerar um ID único
 function generateChannelId() {
     return strtoupper(bin2hex(random_bytes(8)));
 }
@@ -17,35 +17,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $watermark      = isset($_POST['watermark']) ? trim($_POST['watermark']) : null;
     $music          = isset($_POST['music']) ? trim($_POST['music']) : null;
 
+    // Verificação de campos obrigatórios
     if (empty($name) || empty($language) || empty($prompt)) {
-        echo "Por favor, preencha os campos obrigatórios.";
+        echo json_encode(['status' => 'error', 'message' => 'Por favor, preencha os campos obrigatórios.']);
         exit;
     }
 
-    $id = generateChannelId();
-
-    $sql = "INSERT INTO channels (id, name, language, min_prompt_chars, prompt, voice_model, watermark, music)
-            VALUES (:id, :name, :language, :min_prompt_chars, :prompt, :voice_model, :watermark, :music)";
-    $stmt = $pdo->prepare($sql);
-
     try {
+        // Verificar se o canal com o mesmo nome já existe
+        $checkSql = "SELECT id FROM channels WHERE name = :name LIMIT 1";
+        $checkStmt = $pdo->prepare($checkSql);
+        $checkStmt->execute([':name' => $name]);
+        
+        if ($checkStmt->fetch()) {
+            echo json_encode(['status' => 'error', 'message' => 'Este canal já existe.']);
+            exit;
+        }
+
+        // Gerar ID e inserir o novo canal
+        $id = generateChannelId();
+
+        $sql = "INSERT INTO channels (id, name, language, min_prompt_chars, prompt, voice_model, watermark, music)
+                VALUES (:id, :name, :language, :min_prompt_chars, :prompt, :voice_model, :watermark, :music)";
+        $stmt = $pdo->prepare($sql);
+        
         $stmt->execute([
-            ':id'              => $id,
-            ':name'            => $name,
-            ':language'        => $language,
-            ':min_prompt_chars'=> $minPromptChars,
-            ':prompt'          => $prompt,
-            ':voice_model'     => $voiceModel,
-            ':watermark'       => $watermark,
-            ':music'           => $music,
+            ':id'               => $id,
+            ':name'             => $name,
+            ':language'         => $language,
+            ':min_prompt_chars' => $minPromptChars,
+            ':prompt'           => $prompt,
+            ':voice_model'      => $voiceModel,
+            ':watermark'        => $watermark,
+            ':music'            => $music,
         ]);
-        echo "Canal criado com sucesso!";
-        // Opcional: redirecionar
-        // header("Location: content_dashboard.php");
-        // exit;
+
+        echo json_encode(['status' => 'success', 'message' => 'Canal criado com sucesso!']);
     } catch (PDOException $e) {
-        echo "Erro ao criar o canal: " . $e->getMessage();
+        echo json_encode(['status' => 'error', 'message' => 'Erro ao criar o canal: ' . $e->getMessage()]);
     }
 } else {
-    echo "Método inválido.";
+    echo json_encode(['status' => 'error', 'message' => 'Método inválido.']);
 }

@@ -1,4 +1,3 @@
-<!-- app/templates/channels/create_channel_modal.php -->
 <div id="createChannelModal" class="modal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
@@ -6,7 +5,7 @@
       <h2>Criar Novo Canal</h2>
     </div>
     <div class="modal-body">
-    <form id="createChannelForm" action="channels/create_channel.php" method="post">
+      <form id="createChannelForm" action="channels/create_channel.php" method="post">
         <div class="form-group">
           <label for="channelName">Nome:</label>
           <input type="text" id="channelName" name="channelName" required>
@@ -46,8 +45,13 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const createChannelModal = document.getElementById('createChannelModal');
-  const openCreateChannelBtn = document.getElementById('openCreateChannelBtn'); // Este botão deve existir na interface principal para abrir o modal
+  const openCreateChannelBtn = document.getElementById('openCreateChannelBtn');
   const closeModal = createChannelModal.querySelector('.close-modal');
+  const createChannelForm = document.getElementById('createChannelForm');
+
+  function closeModalFunc() {
+    createChannelModal.style.display = "none";
+  }
 
   if (openCreateChannelBtn) {
     openCreateChannelBtn.addEventListener('click', function() {
@@ -57,42 +61,95 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (closeModal) {
     closeModal.addEventListener('click', function() {
-      createChannelModal.style.display = "none";
+      closeModalFunc();
     });
   }
 
   window.addEventListener('click', function(event) {
     if (event.target === createChannelModal) {
-      createChannelModal.style.display = "none";
+      closeModalFunc();
     }
   });
+
+  createChannelForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(createChannelForm);
+    fetch(createChannelForm.action, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        closeModalFunc();
+        showNotification(data.message, true);
+      } else {
+        showNotification(data.message, false);
+      }
+    })
+    .catch(error => {
+      showNotification("Erro na comunicação com o servidor.", false);
+      console.error("Erro:", error);
+    });
+  });
+
+  function showNotification(message, isSuccess) {
+    let notification = document.getElementById('notification');
+    if (!notification) {
+      notification = document.createElement('div');
+      notification.id = 'notification';
+      notification.style.position = 'fixed';
+      notification.style.top = '100px';
+      notification.style.left = '50%';
+      notification.style.transform = 'translateX(-50%)';
+      notification.style.padding = '15px 30px';
+      notification.style.borderRadius = '8px';
+      notification.style.zIndex = '1100';
+      notification.style.fontSize = '1.2em';
+      notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+      document.body.appendChild(notification);
+    }
+
+    notification.innerHTML = message;
+    notification.style.background = isSuccess 
+      ? 'linear-gradient(45deg, #32CD32, #228B22)' 
+      : 'linear-gradient(45deg, #FF6347, #FF4500)';
+    notification.style.color = '#fff';
+    notification.style.display = 'block';
+
+    setTimeout(function() {
+      notification.style.display = 'none';
+    }, 5000);
+  }
 });
 </script>
 
 <style>
-  /* Modal Styles */
   .modal {
-    display: none; /* Oculto inicialmente */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5); /* Fundo semi-transparente */
+    background-color: rgba(0,0,0,0.5);
   }
+
   .modal-content {
     background: linear-gradient(45deg, #8B32F4, #5320A6);
     color: #fff;
-    margin: 100px auto; /* Centraliza verticalmente com margem */
+    margin: 100px auto;
     padding: 20px;
     border: 1px solid #888;
     width: 800px;
-    height: 1000px;
+    height: 600px;
     position: relative;
     overflow-y: auto;
     border-radius: 8px;
   }
+
   .close-modal {
     color: #aaa;
     position: absolute;
@@ -102,33 +159,35 @@ document.addEventListener("DOMContentLoaded", function() {
     font-weight: bold;
     cursor: pointer;
   }
+
   .close-modal:hover,
   .close-modal:focus {
     color: black;
     text-decoration: none;
   }
+
   .modal-header {
     text-align: center;
     margin-bottom: 20px;
   }
-  .modal-body {
-    /* Espaço para o conteúdo do formulário */
-  }
+
   .form-group {
     margin-bottom: 15px;
   }
+
   .form-group label {
     display: block;
     margin-bottom: 5px;
   }
+
   .form-group input,
-  .form-group textarea,
-  .form-group select {
+  .form-group textarea {
     width: 100%;
     padding: 8px;
     border: none;
     border-radius: 4px;
   }
+
   .submit-btn {
     background: linear-gradient(45deg, #8B32F4, #5320A6);
     font-size: 1.2em;
@@ -138,6 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
     color: #fff;
     transition: transform 0.2s, background 0.3s;
   }
+
   .submit-btn:hover {
     transform: scale(1.05);
   }
