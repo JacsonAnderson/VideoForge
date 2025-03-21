@@ -21,33 +21,35 @@
     }
     .toolbar .btn {
       padding: 15px 25px;
-      background: linear-gradient(45deg, #8B32F4, #5320A6);
-      color: #fff;
+      background: linear-gradient(45deg, #3a3a3a, #2a2a2a);
+      color: #F3F3F3;
       border: none;
       border-radius: 8px;
       font-size: 1.2em;
       cursor: pointer;
-      transition: transform 0.2s, background 0.3s;
+      transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
     }
     .toolbar .btn:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 5px #8B32F4;
     }
     .add-video-btn {
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: linear-gradient(45deg, #8B32F4, #5320A6);
+      background: linear-gradient(45deg, #3a3a3a, #2a2a2a);
       border: none;
-      color: #fff;
+      color: #F3F3F3;
       font-size: 2em;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s, background 0.3s;
+      transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
     }
     .add-video-btn:hover {
       transform: scale(1.1);
+      box-shadow: 0 0 5px #8B32F4;
     }
   </style>
 </head>

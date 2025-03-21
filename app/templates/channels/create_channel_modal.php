@@ -153,11 +153,11 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   .modal-content {
-    background: linear-gradient(45deg, #8B32F4, #5320A6);
-    color: #fff;
+    background: linear-gradient(45deg, #2a2a2a, #1e1e1e);
+    color: #F3F3F3;
     margin: 100px auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #3f3f3f;
     width: 800px;
     height: 600px;
     position: relative;
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   .close-modal {
-    color: #aaa;
+    color: #ccc;
     position: absolute;
     top: 10px;
     right: 20px;
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   .close-modal:hover,
   .close-modal:focus {
-    color: black;
+    color: #8B32F4;
     text-decoration: none;
   }
 
@@ -199,21 +199,25 @@ document.addEventListener("DOMContentLoaded", function() {
   .form-group textarea {
     width: 100%;
     padding: 8px;
-    border: none;
+    border: 1px solid #3f3f3f;
     border-radius: 4px;
+    background-color: #2a2a2a;
+    color: #F3F3F3;
   }
 
   .submit-btn {
-    background: linear-gradient(45deg, #8B32F4, #5320A6);
+    background: linear-gradient(45deg, #2a2a2a, #1e1e1e);
     font-size: 1.2em;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
-    color: #fff;
-    transition: transform 0.2s, background 0.3s;
+    color: #F3F3F3;
+    border: none;
+    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
   }
 
   .submit-btn:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 5px #8B32F4;
   }
 </style>

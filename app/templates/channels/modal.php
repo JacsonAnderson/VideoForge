@@ -134,11 +134,11 @@
   }
 
   .modal-content {
-    background: linear-gradient(45deg, #8B32F4, #5320A6);
-    color: #fff;
+    background: linear-gradient(45deg, #2a2a2a, #1e1e1e);
+    color: #F3F3F3;
     margin: 100px auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #3f3f3f;
     width: 800px;
     height: 600px;
     position: relative;
@@ -147,7 +147,7 @@
   }
 
   .close-modal {
-    color: #aaa;
+    color: #ccc;
     position: absolute;
     top: 10px;
     right: 20px;
@@ -158,7 +158,7 @@
 
   .close-modal:hover,
   .close-modal:focus {
-    color: black;
+    color: #8B32F4;
     text-decoration: none;
   }
 
@@ -169,17 +169,18 @@
 
   .create-channel-btn {
     padding: 10px 20px;
-    background: linear-gradient(45deg, #8B32F4, #5320A6);
-    color: #fff;
+    background: linear-gradient(45deg, #3a3a3a, #2a2a2a);
+    color: #F3F3F3;
     border: none;
     border-radius: 8px;
     font-size: 1.2em;
     cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
+    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
   }
 
   .create-channel-btn:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 5px #8B32F4;
   }
 
   .channel-info {
@@ -191,6 +192,7 @@
   .channel-name {
     font-weight: bold;
     font-size: 1.1em;
+    color: #F3F3F3;
   }
 
   .channel-language {
@@ -210,6 +212,7 @@
     cursor: pointer;
     font-size: 1.5em;
     padding: 0 5px;
+    transition: transform 0.2s;
   }
 
   .edit-btn {
@@ -232,7 +235,7 @@
   }
 
   .channel-row {
-    background: #3c2574;
+    background: #2a2a2a;
     padding: 10px;
     border-radius: 8px;
   }
