@@ -1,7 +1,6 @@
 <?php
 // add_video.php - Localizado em app/templates/videos/add_video.php
 
-// Ativa exibição de erros para debug (remova ou desative em produção)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -11,7 +10,6 @@ require_once __DIR__ . '/../../app/db.php';
 
 $start_time = microtime(true);
 
-// Validação do método POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['status' => 'error', 'message' => 'Método inválido']);
@@ -21,14 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $channelId = trim($_POST['channelId'] ?? '');
 $referenceLink = trim($_POST['referenceLink'] ?? '');
 
-if (!$channelId || !$referenceLink) {
+if (empty($channelId) || empty($referenceLink)) {
     http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'Canal e link são obrigatórios.']);
     exit;
 }
 
 try {
-    // Busca o nome do canal
     $stmt = $pdo->prepare("SELECT name FROM channels WHERE id = :id");
     $stmt->execute([':id' => $channelId]);
     $channel = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -40,13 +37,21 @@ try {
     }
     $channelName = $channel['name'];
 
-    // Conta vídeos existentes para o canal
+    // Verifica se o link já existe para o mesmo canal
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM videos WHERE channel_id = :channel_id AND reference_link = :reference_link");
+    $stmt->execute([':channel_id' => $channelId, ':reference_link' => $referenceLink]);
+    $existing = (int)$stmt->fetchColumn();
+    if ($existing > 0) {
+        http_response_code(409);
+        echo json_encode(['status' => 'error', 'message' => 'Esse link já foi registrado para este canal.']);
+        exit;
+    }
+
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM videos WHERE channel_id = :channel_id");
     $stmt->execute([':channel_id' => $channelId]);
     $videoNumber = (int)$stmt->fetchColumn() + 1;
     $videoNumberPadded = str_pad($videoNumber, 3, "0", STR_PAD_LEFT);
 
-    // Gera o nome da pasta e caminho
     $videoFolderName = $channelName . '-' . $channelId . '-V' . $videoNumberPadded;
     $directoryPath = '/var/www/app/docker/data/channels/' . $videoFolderName;
 
@@ -54,7 +59,6 @@ try {
         throw new Exception('Erro ao criar diretório do vídeo.');
     }
 
-    // Insere o vídeo na tabela
     $stmt = $pdo->prepare("INSERT INTO videos (
         channel_id, channel_name, video_number, reference_link,
         original_title, corrected_transcript, directory_path,
@@ -64,6 +68,7 @@ try {
         '', '', :directory_path,
         '', '', '', '', ''
     )");
+
     $stmt->execute([
         ':channel_id' => $channelId,
         ':channel_name' => $channelName,

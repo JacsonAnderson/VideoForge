@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const channelSelect = document.getElementById('channelSelect');
   const referenceLink = document.getElementById('referenceLink');
 
-  // Carrega os canais para o select
   function fetchChannels() {
     fetch('channels/list_channels.php')
       .then(response => response.json())
@@ -57,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   }
 
-  // Abre o modal e carrega os canais
   if (openAddVideoBtn) {
     openAddVideoBtn.addEventListener('click', function() {
       addVideoModal.style.display = "block";
@@ -65,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Fecha o modal
   if (closeModal) {
     closeModal.addEventListener('click', function() {
       addVideoModal.style.display = "none";
@@ -77,10 +74,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // Envio do formulário via AJAX
   addVideoForm.addEventListener('submit', function(event) {
     event.preventDefault();
-
     const formData = new FormData(addVideoForm);
     const submitBtn = addVideoForm.querySelector('.submit-btn');
     submitBtn.disabled = true;
@@ -88,14 +83,15 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch(addVideoForm.action, {
       method: 'POST',
       body: formData,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      }
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
     })
     .then(response => {
       if (!response.ok) {
-        // Se o status não for OK, lança um erro
-        return response.text().then(text => { throw new Error(text || response.statusText); });
+        return response.json().then(errData => {
+          const error = new Error(errData.message);
+          error.status = response.status;
+          throw error;
+        });
       }
       return response.json();
     })
@@ -103,23 +99,23 @@ document.addEventListener("DOMContentLoaded", function() {
       submitBtn.disabled = false;
       addVideoModal.style.display = "none";
       showNotification(data.message, data.status === 'success');
-      if (data.status === 'success') {
-        referenceLink.value = '';
-      }
+      if (data.status === 'success') { referenceLink.value = ''; }
     })
     .catch(error => {
       submitBtn.disabled = false;
-      showNotification("Erro na comunicação com o servidor.", false);
+      if (error.status === 409) {
+        // Notificação exclusiva para link duplicado
+        showNotification("Esse link já foi registrado para este canal.", false, true);
+      } else {
+        showNotification("Erro na comunicação com o servidor.", false);
+      }
       console.error("Erro:", error);
     });
   });
 
-  // Função de notificação
-  function showNotification(message, isSuccess) {
+  function showNotification(message, isSuccess, isDuplicate = false) {
     const existingNotification = document.getElementById('notification');
-    if (existingNotification) {
-      existingNotification.remove();
-    }
+    if (existingNotification) { existingNotification.remove(); }
     const notification = document.createElement('div');
     notification.id = 'notification';
     notification.textContent = message;
@@ -134,9 +130,15 @@ document.addEventListener("DOMContentLoaded", function() {
     notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
     notification.style.opacity = '0';
     notification.style.transition = 'opacity 0.5s ease';
-    notification.style.background = isSuccess 
-      ? 'linear-gradient(45deg, #32CD32, #228B22)' 
-      : 'linear-gradient(45deg, #FF6347, #FF4500)';
+    if (isSuccess) {
+      notification.style.background = 'linear-gradient(45deg, #32CD32, #228B22)';
+    } else {
+      if (isDuplicate) {
+        notification.style.background = 'linear-gradient(45deg, #FF8C00, #FF4500)';
+      } else {
+        notification.style.background = 'linear-gradient(45deg, #FF6347, #FF4500)';
+      }
+    }
     notification.style.color = '#fff';
     document.body.appendChild(notification);
     setTimeout(() => { notification.style.opacity = '1'; }, 100);
