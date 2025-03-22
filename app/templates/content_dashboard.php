@@ -69,7 +69,7 @@
           <button id="openModalBtn" class="btn">Gerenciar Canais</button>
         </div>
         <div class="toolbar-right">
-          <button class="add-video-btn" onclick="location.href='adicionar_video.php'">+</button>
+          <button id="openAddVideoBtn" class="add-video-btn">+</button>
         </div>
       </div>
 
@@ -88,10 +88,13 @@
   </div>
 
   <!-- Inclui o módulo do Modal -->
-  <?php include 'channels/modal.php'; ?>
+  <?php include 'channels/modal.php'; ?> 
 
   <!-- Inclui o módulo do create_channel_modal -->
   <?php include 'channels/create_channel_modal.php'; ?>
+
+    <!-- Inclui o módulo do Modal -->
+    <?php include 'videos/add_video_modal.php'; ?> 
   
   <script>
     // Lógica para alternar a sidebar
