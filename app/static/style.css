@@ -248,3 +248,26 @@ footer {
   font-size: 0.9em;
   border-top: 2px solid #3f3f3f; /* Separador superior no rodapé */
 }
+
+html, body {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.main-content > *:not(footer) {
+  flex-shrink: 0;
+}
+
+footer {
+  margin-top: auto;
+}

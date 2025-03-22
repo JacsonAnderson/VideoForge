@@ -6,7 +6,7 @@
   <title>Painel de Conteúdo - VideoForge</title>
   <link rel="stylesheet" href="static/style.css">
   <style>
-    /* Estilos para a página Painel de Conteúdo */
+    /* Estilos da toolbar */
     .toolbar {
       display: flex;
       align-items: center;
@@ -61,11 +61,8 @@
       <?php include 'partials/header-content.php'; ?>
       
       <div class="toolbar">
-        <div class="toolbar-left">
-          <!-- Espaço para conteúdo à esquerda, se necessário -->
-        </div>
+        <div class="toolbar-left"></div>
         <div class="toolbar-center">
-          <!-- Botão que abre o modal -->
           <button id="openModalBtn" class="btn">Gerenciar Canais</button>
         </div>
         <div class="toolbar-right">
@@ -74,33 +71,23 @@
       </div>
 
       <div class="separator-horizontal"></div>
+
+      <!-- Removido o <section> fixo -->
       
-      <section class="content">
-        <h2>Painel de Conteúdo</h2>
-        <p>
-          Neste painel, você poderá gerenciar canais e vídeos. Visualize, edite e organize os canais,
-          adicione novos vídeos, acompanhe o status de produção e defina tags para controlar o processo.
-        </p>
-      </section>
+      <?php include 'videos/channel_video_view.php'; ?>
 
       <?php include 'partials/footer.php'; ?>
     </main>
   </div>
 
-  <!-- Inclui o módulo do Modal -->
   <?php include 'channels/modal.php'; ?> 
-
-  <!-- Inclui o módulo do create_channel_modal -->
   <?php include 'channels/create_channel_modal.php'; ?>
-
-  <!-- Inclui o módulo do Modal -->
   <?php include 'videos/add_video_modal.php'; ?> 
-  
+
   <script>
-    // Lógica para alternar a sidebar
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('sidebar-toggle');
-    toggleBtn.addEventListener('click', function() {
+    toggleBtn.addEventListener('click', () => {
       sidebar.classList.toggle('collapsed');
     });
   </script>
