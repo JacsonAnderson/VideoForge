@@ -1,3 +1,6 @@
+<!-- add_video_modal.php -->
+<link rel="stylesheet" href="static/style_video.css">
+
 <div id="addVideoModal" class="modal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
@@ -8,9 +11,7 @@
       <form id="addVideoForm" action="videos/add_video.php" method="post">
         <div class="form-group">
           <label for="channelSelect">Selecione o Canal:</label>
-          <select id="channelSelect" name="channelId" required>
-            <!-- As opções serão preenchidas dinamicamente com os canais existentes -->
-          </select>
+          <select id="channelSelect" name="channelId" required></select>
         </div>
         <div class="form-group">
           <label for="referenceLink">Link de Referência:</label>
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const channelSelect = document.getElementById('channelSelect');
   const referenceLink = document.getElementById('referenceLink');
 
+  // Carrega os canais para o select
   function fetchChannels() {
     fetch('channels/list_channels.php')
       .then(response => response.json())
@@ -55,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   }
 
+  // Abre o modal e carrega os canais
   if (openAddVideoBtn) {
     openAddVideoBtn.addEventListener('click', function() {
       addVideoModal.style.display = "block";
@@ -62,18 +65,19 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
+  // Fecha o modal
   if (closeModal) {
     closeModal.addEventListener('click', function() {
       addVideoModal.style.display = "none";
     });
   }
-
   window.addEventListener('click', function(event) {
     if (event.target === addVideoModal) {
       addVideoModal.style.display = "none";
     }
   });
 
+  // Envio do formulário via AJAX
   addVideoForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -88,12 +92,17 @@ document.addEventListener("DOMContentLoaded", function() {
         'X-Requested-With': 'XMLHttpRequest'
       }
     })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        // Se o status não for OK, lança um erro
+        return response.text().then(text => { throw new Error(text || response.statusText); });
+      }
+      return response.json();
+    })
     .then(data => {
       submitBtn.disabled = false;
       addVideoModal.style.display = "none";
       showNotification(data.message, data.status === 'success');
-
       if (data.status === 'success') {
         referenceLink.value = '';
       }
@@ -105,12 +114,12 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  // Função de notificação
   function showNotification(message, isSuccess) {
     const existingNotification = document.getElementById('notification');
     if (existingNotification) {
       existingNotification.remove();
     }
-
     const notification = document.createElement('div');
     notification.id = 'notification';
     notification.textContent = message;
@@ -129,101 +138,12 @@ document.addEventListener("DOMContentLoaded", function() {
       ? 'linear-gradient(45deg, #32CD32, #228B22)' 
       : 'linear-gradient(45deg, #FF6347, #FF4500)';
     notification.style.color = '#fff';
-
     document.body.appendChild(notification);
-
-    setTimeout(() => {
-      notification.style.opacity = '1';
-    }, 100);
-
+    setTimeout(() => { notification.style.opacity = '1'; }, 100);
     setTimeout(() => {
       notification.style.opacity = '0';
-      setTimeout(() => {
-        notification.remove();
-      }, 500);
+      setTimeout(() => { notification.remove(); }, 500);
     }, 5000);
   }
 });
 </script>
-
-<style>
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-  }
-
-  .modal-content {
-    background: linear-gradient(45deg, #2a2a2a, #1e1e1e);
-    color: #F3F3F3;
-    margin: 100px auto;
-    padding: 20px;
-    border: 1px solid #3f3f3f;
-    width: 800px;
-    max-height: 80%;
-    position: relative;
-    overflow-y: auto;
-    border-radius: 8px;
-  }
-
-  .close-modal {
-    color: #ccc;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .close-modal:hover,
-  .close-modal:focus {
-    color: #8B32F4;
-    text-decoration: none;
-  }
-
-  .modal-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .form-group {
-    margin-bottom: 15px;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-
-  .form-group input,
-  .form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #3f3f3f;
-    border-radius: 4px;
-    background-color: #2a2a2a;
-    color: #F3F3F3;
-  }
-
-  .submit-btn {
-    background: linear-gradient(45deg, #2a2a2a, #1e1e1e);
-    font-size: 1.2em;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #F3F3F3;
-    border: none;
-    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
-  }
-
-  .submit-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 5px #8B32F4;
-  }
-</style>

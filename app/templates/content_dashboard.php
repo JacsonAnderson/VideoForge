@@ -93,8 +93,8 @@
   <!-- Inclui o módulo do create_channel_modal -->
   <?php include 'channels/create_channel_modal.php'; ?>
 
-    <!-- Inclui o módulo do Modal -->
-    <?php include 'videos/add_video_modal.php'; ?> 
+  <!-- Inclui o módulo do Modal -->
+  <?php include 'videos/add_video_modal.php'; ?> 
   
   <script>
     // Lógica para alternar a sidebar
